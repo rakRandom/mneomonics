@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --title-color: #FDFDFD;
+    --body-color: #FDFDFD;
+    --color-1: #181818;
+    --color-2: #404040;
+    --color-3: #f97316;
+    --color-4: ;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333;
+    cursor: pointer;
+}
+
+body {
+    background-color: var(--color-1);
+    color: var(--body-color);
+}
+
+@layer components {
+    .regular-button {
+        @apply 
+            hover:text-[var(--title-color)] 
+            hover:bg-[var(--color-2)] 
+        ;
+    }
+
+    .regular-border {
+        @apply 
+            border-2 
+            border-[var(--color-2)] 
+            rounded-md
+        ;
+    }
+
+    .regular-hr {
+        @apply 
+            border-t-2 
+            border-[var(--color-2)] 
+            shadow
+        ;
+    }
+
+    .regular-input {
+        @apply
+            px-1 py-0.5
+            bg-transparent
+            outline-none
+            regular-border
+        ;
+    }
+}
