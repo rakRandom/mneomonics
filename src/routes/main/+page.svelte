@@ -1,97 +1,75 @@
 <script lang="ts">
-    type Question = {
-        header: string,
-        statement: string[],
-        imageURL: string | undefined,
-        alternatives: string[],
-        correctAlt: number
-    };
+    const promise = new Promise(resolve => {
+        setTimeout(() => {
+            resolve("foo");
+        }, 300);
+    });
 
-    export let data;
-    console.log(data);
-
-    let currentQuestion: Question | undefined = {
-        header: "Question 1 - OBMEP - 2024",
-        statement: [
-            "Lorem ipsum, dor sit amet."
-        ],
-        imageURL: undefined,
-        alternatives: [
-            "Lorem ipsum",
-            "Lorem ipsum",
-            "Lorem ipsum",
-            "Lorem ipsum",
-        ],
-        correctAlt: 0
-    };
+    function exitPage() {
+        window.location.href = "login";
+    }
 </script>
 
-<div class="flex h-screen w-full *:h-full">
-    <div class="flex flex-col w-1/3">
-        <div class="flex items-center px-6 py-4 shadow-lg">
-            <button type="button" class="font-semibold py-1 w-[60px] h-fit regular-border regular-button">
-                Exit
-            </button>
-            <h1 class="font-semibold text-3xl ml-4 pl-4 border-l-2 border-[var(--color-2)]">
-                mNeomonics
-            </h1>
-            <button type="button" class="relative ml-auto h-[32px] aspect-square rounded-full">
-                <img src="plus.png" alt=""> <!-- This version is ugly, change it later -->
-                <div class="absolute top-0 w-full h-full rounded-full bg-black opacity-0 hover:opacity-25"></div>
-            </button>
-        </div>
-        <hr class="regular-hr">
-        <ul class="
-                p-6 overflow-y-auto
-                *:*:regular-button *:*:regular-border 
-                *:*:block *:*:text-left *:*:w-full *:*:h-full
-                *:*:mb-4 *:*:px-4 *:*:py-2
-                *:*:truncate">
-            {#each Array(30).keys() as register}
-            <li>
-                <button type="button">
-                    Question {register + 1} - OBMEP - 2024
-                </button>
-            </li>
-            {/each}
-        </ul>
+<div class="flex flex-col h-screen w-full px-16 pb-4">
+    <button 
+        type="button" 
+        class="
+            absolute top-4 left-6 
+            py-1 w-[75px] 
+            colored-button"
+        on:click={exitPage}
+        >
+        Exit
+    </button>
+
+    <div class="font-semibold text-5xl text-center w-full my-8">
+        Collections
     </div>
-    <div class="w-2/3 border-l-2 border-[var(--color-2)] rounded-l-lg shadow-lg">
-        <div class="flex items-center gap-4 px-4 py-4">
-            <h1 class="flex-1 text-2xl break-all">
-                {currentQuestion?.header ?? "Question"}
-            </h1>
-            <button 
-                type="button" 
-                class="font-semibold py-1 w-[100px] h-fit regular-border hover:border-transparent hover:bg-[var(--color-3)]">
-                Learn
-            </button>
-        </div>
-        <hr class="regular-hr">
-        <div class="flex flex-col gap-4 p-6">
-            {#if currentQuestion !== undefined}
-                {#each currentQuestion?.statement as paragraph}
-                <p class="break-all">
-                    {paragraph}
-                </p>
+    <div class="flex h-full bg-[var(--color-1)] rounded-3xl regular-border shadow-inner overflow-hidden">
+        <div class="grid max-[1280px]:grid-cols-4 grid-cols-6 p-8 gap-8 h-full w-full overflow-y-auto">
+            {#await promise}
+                {#each Array(8) as _}
+                <div 
+                    class="
+                        flex-1 bg-[var(--color-2)] 
+                        aspect-square rounded-2xl"
+                    >
+                </div>
                 {/each}
+            {:then _}
+                {#each Array(16).keys() as id}
+                <a 
+                    class="
+                        flex-1 p-4 
+                        border-2 border-[var(--color-2)] 
+                        aspect-square rounded-2xl shadow-lg
+                        cursor-pointer 
+                        transition-transform
+                        hover:border-[var(--color-3)] hover:-translate-y-0.5"
+                    href="main/collection/{id}"
+                    >
+                    <h2 class="font-semibold text-xl text-center">
+                        Collection Name
+                    </h2>
 
-                {#if currentQuestion?.imageURL}
-                <img src={currentQuestion?.imageURL} alt="">
-                {/if}
+                    <hr class="regular-hr my-2">
 
-                <ul>
-                    {#each currentQuestion?.alternatives as alternative, i}
-                    <li>
-                    {#if currentQuestion?.correctAlt == i}
-                    [X]
-                    {:else}
-                    [&nbsp;&nbsp;]
-                    {/if}
-                    - {alternative}</li>
-                    {/each}
-                </ul>
-            {/if}
+                    <div role="table" class="flex w-full px-2">
+                        <ol class="w-fit">
+                            <li>Flash Cards:</li>
+                            <li>Times seen:</li>
+                            <li>Last seen (days):</li>
+                        </ol>
+
+                        <ol class="flex-1 text-right">
+                            <li>4</li>
+                            <li>0</li>
+                            <li>7</li>
+                        </ol>
+                    </div>
+                </a>
+                {/each}
+            {/await}
         </div>
     </div>
 </div>

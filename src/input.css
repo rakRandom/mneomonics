@@ -42,6 +42,15 @@ body {
         ;
     }
 
+    .colored-button {
+        @apply 
+            regular-border
+            font-semibold
+            hover:border-transparent 
+            hover:bg-[var(--color-3)]
+        ;
+    }
+
     .regular-border {
         @apply 
             border-2 

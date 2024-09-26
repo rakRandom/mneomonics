@@ -82,8 +82,7 @@
                 <button 
                     type="submit" 
                     class="
-                        block font-semibold w-fit mx-auto px-8 py-1 
-                        regular-border hover:border-transparent hover:bg-[var(--color-3)]" 
+                        block w-fit mx-auto px-8 py-1 colored-button" 
                     on:click={form_login}>
                     Login
                 </button>
