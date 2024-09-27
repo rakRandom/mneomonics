@@ -39,6 +39,8 @@ body {
         @apply 
             hover:text-[var(--title-color)] 
             hover:bg-[var(--color-2)] 
+            active:bg-[var(--color-3)]
+            active:border-transparent
         ;
     }
 

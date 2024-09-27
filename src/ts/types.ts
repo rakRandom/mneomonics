@@ -1,6 +1,6 @@
 type Question = {
     header: string,
-    statement: string[],
+    statement: string,
     imageURL: string | undefined,
     alternatives: string[],
     correctAlt: number
